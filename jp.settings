@@ -17,7 +17,7 @@ configs = {
       {
         :win_style =>
         {
-          :devenv => 'C:\utils\vs2010\Common7\IDE\devenv.exe',
+          :devenv => 'C:\utils\vs2012\Common7\IDE\devenv.exe',
           :ahk_spy => 'C:\utils\autohotkey\AU3_Spy.exe',
           :process_explorer => 'C:\utils\sysinternals\procexp.exe',
           :divvy => 'C:\utils\divvy\Divvy.exe',
@@ -30,7 +30,7 @@ configs = {
         {
           :mingw => '/c/utils/mingw',
           :vim => '/c/utils/vim/vim73',
-          :devenv => '/c/utils/vs2010/Common7/IDE/devenv.exe',
+          :devenv => '/c/utils/vs2012/Common7/IDE/devenv.exe',
           :beyond_compare3 => '/C/utils/beyond_compare_3/BComp.exe',
         }
      }
