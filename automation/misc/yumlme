@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 def draw(diagram)
-  url = "http://yuml.me/diagram/scruffy;/class/#{read_yuml_file(diagram)}.svg"
+  url = "http://yuml.me/diagram/scruffy;dir:TB;/class/#{read_yuml_file(diagram)}.svg"
   system("open '#{url}'")
 end
 

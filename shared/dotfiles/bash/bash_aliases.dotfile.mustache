@@ -8,8 +8,10 @@ alias vim={{ core.vim }}
 {{# core.is_osx }}
 alias bctags=/usr/local/Cellar/ctags/5.8/bin/ctags
 alias rspecs='rspec spec/**/*.rb'
-alias kk='killall Keymando;open /Applications/Keymando.app'
-alias rk2='cd ~/repositories/github/keymando;killall Keymando;rake run'
+alias kk='killall Keymando'
+# alias rk2='cd ~/repositories/github/keymando;killall Keymando;rake run'
+alias rk2='killall Keymando;open /Applications/Keymando.app'
+alias pres='cd ~/repositories/github/camug_2012_nov'
 {{/core.is_osx }}
 
 {{# core.is_windows }}
