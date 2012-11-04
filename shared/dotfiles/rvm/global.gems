@@ -1,3 +1,7 @@
 bundler
+configatron
+rubygems-bundler
+rake
+rvm
 interactive_editor
 awesome_print

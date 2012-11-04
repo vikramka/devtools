@@ -3,8 +3,9 @@
 install_rvm()
 {
     if [ ! -x ~/.rvm ]; then 
-      bash -s stable < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)
+      bash -s stable --ruby < <(curl -L https://get.rvm.io)
     fi
+    mkdir ~/.rvm/gemsets/
     source $HOME/.rvm/scripts/rvm
     cp ~/repositories/developwithpassion/devtools/shared/dotfiles/rvm/global.gems ~/.rvm/gemsets/
     rvm reload
