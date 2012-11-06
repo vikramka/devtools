@@ -5,6 +5,10 @@ expand do
     contents %w[windows mingw].as_glob_pattern
   end
 
+  copy_to configatron.core.home do
+    contents %w[windows viemu].as_glob_pattern
+  end
+
   snipmate_snippets = glob(%w[shared dotfiles vim .vim_runtime bundle snipmate.vim snippets *.snippets].as_glob_pattern)
   develop_with_passion_snippets = glob(%w[shared dotfiles vim .vim_runtime bundle developwithpassion snippets *.snippets].as_glob_pattern)
   snipmate_snippets.concat(develop_with_passion_snippets).each do|file|

@@ -162,12 +162,12 @@ return
 
 ;observations with contract
 oc:
-Send, !reno
+Send, !renb
 return
 
 ;observations without contract
 owc:
-Send, !renb
+Send, !reno
 return
 
 ;static observations
