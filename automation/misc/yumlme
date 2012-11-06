@@ -9,7 +9,7 @@ def read_yuml_file(file_name)
   contents = []
   File.open(file_name,'r') do|file|
     file.each do|line|
-      contents.push line
+      contents.push line.chomp
     end
   end
   contents.join(',')
