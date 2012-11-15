@@ -96,6 +96,11 @@ function github_git_clone()
   git clone git@github.com:{{my.github.user}}/$1 $2
 }
 
+function bb_git_clone()
+{
+  git clone git@bitbucket:{{my.github.user}}/$1 $2
+}
+
 function slice_git_clone()
 {
   git clone git@slicehost:$1 $2
