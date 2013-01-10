@@ -12,6 +12,9 @@ alias kk='killall Keymando'
 # alias rk2='cd ~/repositories/github/keymando;killall Keymando;rake run'
 alias rk2='killall Keymando;open /Applications/Keymando.app'
 alias pres='cd ~/repositories/github/camug_2012_nov'
+alias dwp='cd ~/repositories/github/dwp'
+alias prep='cd ~/repositories/github/dwp/ruby_primer/prep/'
+alias aptus='cd ~/repositories/aptus'
 {{/core.is_osx }}
 
 {{# core.is_windows }}
@@ -99,6 +102,11 @@ function github_git_clone()
 function bb_git_clone()
 {
   git clone git@bitbucket:{{my.github.user}}/$1 $2
+}
+
+function aptus_git_clone()
+{
+  git clone ssh://git@aptus/$1.git $2
 }
 
 function slice_git_clone()
