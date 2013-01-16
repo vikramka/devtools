@@ -114,7 +114,6 @@ function slice_git_clone()
   git clone git@slicehost:$1 $2
 }
 
-
 #directory aliases
 {{# core.is_windows }}
 alias dwp='cd ~/repositories/github/dwp'
@@ -135,5 +134,14 @@ alias daxko='cd /c/users/jp/repositories/daxko'
 alias ~~='cd /c/users/jp'
 {{/core.is_cygwin }}
 
-#file alises
+#file aliases
 alias licenses='vi ~/repositories/developwithpassion/developwithpassion.com/licenses/licenses.markdown'
+
+#git aliases
+alias ggm="gco master"
+alias gcm="gitrb commit"
+alias gco="git checkout $1"
+alias gmrg="git merge $1"
+alias gs="gitrb switch $1"
+alias gpo="gitrb push origin"
+alias gbd="git branch -D $1"

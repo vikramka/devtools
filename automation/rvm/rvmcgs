@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+version = ARGV[0]
+folder = Dir.pwd
+folder = folder.gsub(/\//,'_').slice(1,folder.length).downcase
+`echo rvm #{version}@#{folder} --create > .rvmrc`
+
+
