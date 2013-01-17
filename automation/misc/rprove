@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+file_to_run = ARGV[0]
+lib = File.basename(Dir.pwd)
+file_to_run = lib unless file_to_run
+
+system("ruby proofs/#{file_to_run}.rb")
+
+
+
