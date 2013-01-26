@@ -1,1 +1,32 @@
-/Users/jp/repositories/aptus/tools/rprove/rprove
+#!/usr/bin/env ruby
+
+require_relative 'colour'
+
+def render_banner(header,footer)
+  puts "********************#{header}********************".colourize(:light_yellow).on_blue
+  yield
+  puts "********************#{footer}********************".colourize(:light_yellow)
+end
+
+def gather_stats(raw_output)
+  raw_output
+end
+
+render_banner("PROOF RUN STARTED","PROOF RUN ENDED") do
+  render_banner("BEGIN","END") do
+    file_to_run = ARGV[0]
+    lib = File.basename(Dir.pwd)
+    file_to_run = lib unless file_to_run
+
+    command = "ruby proofs/#{file_to_run}.rb"
+
+    raw_output = `#{command}`
+    raw_output.chomp.split("\n").each do|line|
+      puts "\t#{line}"
+    end
+
+    stats = gather_stats(raw_output)
+  end
+end
+
+
