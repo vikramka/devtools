@@ -1,7 +1,7 @@
 require 'ostruct'
 
 module Console
-  COLOURS = {
+  STANDARD_COLOURS = {
     :black => 0,
     :red => 1,
     :green => 2,
@@ -10,17 +10,31 @@ module Console
     :magenta => 5,
     :cyan => 6,
     :white => 7,
-    :default => 9,
-    
-    :light_black => 10,
-    :light_red => 11,
-    :light_green => 12,
-    :light_yellow => 13,
-    :light_blue => 14,
-    :light_magenta => 15,
-    :light_cyan => 16,
-    :light_white => 17
+    :default => 9
   }
+
+  class Colours
+    Console::STANDARD_COLOURS.each do|name,value|
+      light_colour_name = "light_#{name}"
+      @colour_names << name
+      @colour_names << light_colour_name
+
+      Colours.define_singleton_method name { value }
+      Colours.define_singleton_method light_colour_name { value + 10 } 
+    end
+
+    def self.colour_names
+      @colour_names ||= []
+    end
+
+    def self.get_colour_value(name)
+      send name
+    end
+
+    def self.each_colour(&block)
+      @colour_names.each &block
+    end
+  end
 
   MODES = {
     :default => 0, 
@@ -32,10 +46,11 @@ module Console
 
 end
 class String
+  COLOUR_MAP = Console::Colours
 
   class ColourSettings < OpenStruct
     def self.build(values)
-      default_colour = Console::COLOURS[:default]
+      default_colour = COLOUR_MAP.default
       default_mode = Console::MODES[:default]
 
       colour = default_colour
@@ -43,11 +58,11 @@ class String
       mode = default_mode
 
       if (values.instance_of?(Hash))
-        colour = COLOURS[values[:colour]]
-        background = COLOURS[values[:background]]
+        colour = COLOUR_MAP.get_colour_value(values[:colour])
+        background = COLOUR_MAP.get_colour_value(values[:background])
         mode = MODES[values[:mode]]
       elsif (values.instance_of?(Symbol))
-        colour = COLOURS[values]
+        colour = COLOUR_MAP.get_colour_value(values)
       end
 
       new :colour => colour, :background => background, :mode => mode
@@ -93,21 +108,16 @@ class String
     @uncolourized || self
   end
   
-  COLOURS.each_key do | key |
-    next if key == :default
-
-    define_method key do
-      self.colourize( :colour => key )
+  COLOUR_MAP.each_colour do |name|
+    define_method name do
+      self.colourize(:colour => name)
     end
-    
-    define_method "on_#{key}" do
-      self.colourize( :background => key )
+    define_method "with_#{name}_background" do
+      self.colourize(:background => name)
     end
   end
 
   MODES.each_key do | key |
-    next if key == :default
-    
     define_method key do
       self.colourize( :mode => key )
     end
