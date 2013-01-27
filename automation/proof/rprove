@@ -1,32 +1,88 @@
 #!/usr/bin/env ruby
 
-require_relative 'colour'
+require_relative 'colours'
+require_relative 'text_effects'
+require_relative 'coloured_text'
 
-def render_banner(header,footer)
-  puts "********************#{header}********************".colourize(:light_yellow).on_blue
-  yield
-  puts "********************#{footer}********************".colourize(:light_yellow)
-end
-
-def gather_stats(raw_output)
-  raw_output
-end
-
-render_banner("PROOF RUN STARTED","PROOF RUN ENDED") do
-  render_banner("BEGIN","END") do
-    file_to_run = ARGV[0]
-    lib = File.basename(Dir.pwd)
-    file_to_run = lib unless file_to_run
-
-    command = "ruby proofs/#{file_to_run}.rb"
-
-    raw_output = `#{command}`
-    raw_output.chomp.split("\n").each do|line|
-      puts "\t#{line}"
+module Proof
+  module Runner
+    extend self
+    def render_banner(header,footer, colour = ColouredText.build)
+      puts colour.render header
+      yield
+      puts colour.render footer
     end
 
-    stats = gather_stats(raw_output)
+    class LineProcessing
+      attr_reader :regex
+      attr_reader :colour
+      attr_reader :render_block
+      attr_reader :lines_processed
+
+      def initialize(regex,&render_block)
+        @regex = regex
+        @colour = colour
+        @render_block = colour
+        @lines_processed = 0
+      end
+      
+      def process(line)
+        match = regex.match(line)
+        if (match)
+          lines_processed += 1
+          render_block.call match
+        end
+      end
+    end
   end
+end
+
+file_to_run = ARGV[0]
+lib = File.basename(Dir.pwd)
+file_to_run = lib unless file_to_run
+
+pass_colour = Proof::Runner::ColouredText.build.light_green
+fail_colour = Proof::Runner::ColouredText.build.red
+error_colour = Proof::Runner::ColouredText.build.light_red
+
+fail_regex = /^(Fail:)(.*)/
+pass_regex = /^(Pass:)(.*)/
+error_regex = /^(Error:)(.*)/
+
+error = 0
+failed = 0
+passed = 0
+
+Proof::Runner.render_banner("PROOF RUN STARTED".center(70,'-'),"PROOF RUN ENDED".center(70,'-'), Proof::Runner::ColouredText.build.light_yellow) do
+  command = "ruby proofs/#{file_to_run}.rb"
+
+  raw_output = `#{command}`
+
+  raw_output.chomp.split("\n").each do|line|
+    matched = false
+    match = pass_regex.match(line)
+    puts "#{pass_colour.underline.render(match[1])}#{pass_colour.render(match[2])}" if match
+    passed +=1 if match
+    matched |= match
+
+    match = error_regex.match(line)
+    puts "#{error_colour.underline.render(match[1])}#{error_colour.render(match[2])}" if match
+    error +=1 if match
+    matched |= match
+
+    match = fail_regex.match(line)
+    failed +=1 if match
+    puts "#{fail_colour.underline.render(match[1])}#{fail_colour.render(match[2])}" if match
+    matched |= match
+
+    puts line unless matched
+  end
+
+  puts "\n"
+
+  puts "#{pass_colour.underline.render('Passed:')}#{pass_colour.render(passed)}"
+  puts "#{fail_colour.underline.render('Failed:')}#{fail_colour.render(failed)}"
+  puts "#{error_colour.underline.render('Error:')}#{error_colour.render(error)}"
 end
 
 
