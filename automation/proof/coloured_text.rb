@@ -9,26 +9,23 @@ module Proof
         @effect = effect
       end
 
-      Proof::Runner::Colours.each_colour do |name|
-        define_method name do
-          self.change_settings(:colour => name)
+      Proof::Runner::Colours.each_colour do |colour|
+        define_method colour do
+          self.change(:colour => colour)
         end
       end
 
-      Proof::Runner::TEXT_EFFECTS.each_key do | key |
-        define_method key do
-        self.change_settings( :effect => key )
+      Proof::Runner::TEXT_EFFECTS.each_key do | effect |
+        define_method effect do
+          self.change(:effect => effect )
+        end
       end
-      end
 
-      def self.build (values = nil)
-        values ||= {}
-        values =  {:colour => :default, :effect => :default }.merge( values )
+      def self.build
+        colour = Proof::Runner::Colours.get_colour_value(:default)
+        effect = Proof::Runner::TEXT_EFFECTS[:default]
 
-        new_colour = Proof::Runner::Colours.get_colour_value(values[:colour])
-        new_effect = Proof::Runner::TEXT_EFFECTS[values[:effect]]
-
-        new new_colour, new_effect
+        new colour, effect
       end
 
       def render(text)
@@ -36,12 +33,13 @@ module Proof
       end
 
       def reset
-        self.effect_default
+        self.class.build
       end
 
-      def change_settings( settings )
+      def change( settings )
         new_colour = settings.fetch(:colour,nil)
         new_colour = new_colour.nil? ? @colour : Proof::Runner::Colours.get_colour_value(new_colour)
+
         new_effect = settings.fetch(:effect, nil)
         new_effect = new_effect.nil? ? @effect : Proof::Runner::TEXT_EFFECTS[new_effect]
 
