@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+bprove = File.expand_path(File.join(File.dirname(__FILE__),'bprove'))
+
+lib = File.basename(Dir.pwd)
+file_to_run ||= "proofs/#{lib}"
+file = ARGV[0] || file_to_run
+file = File.expand_path(file)
+
+system("#{bprove} #{file}")
+
+

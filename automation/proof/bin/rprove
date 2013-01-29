@@ -1,7 +1,0 @@
-#!/usr/bin/env ruby
-
-require_relative '../init'
-
-Proof::Runner::Cli.run(ARGV)
-
-
