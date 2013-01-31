@@ -36,3 +36,15 @@ snippet bddc
 snippet rdnd
 	# :nodoc: all
 
+#proof heading
+snippet head
+	heading '${1}' do
+		proof '${2}' do
+			${3}
+		end
+	end
+
+snippet proof
+	proof '${1}' do
+		${2}
+	end
