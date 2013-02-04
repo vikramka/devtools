@@ -2,11 +2,14 @@
 
 bprove = File.expand_path(File.join(File.dirname(__FILE__),'bprove'))
 
+file_names = ARGV[0]
 lib = File.basename(Dir.pwd)
-file_to_run ||= "proofs/#{lib}"
-file = ARGV[0] || file_to_run
-file = File.expand_path(file)
+file_names ||= "proofs/#{lib}.rb"
+file_names = File.expand_path(file_names)
 
-system("#{bprove} #{file}")
+file_names = File.join(file_names,"**/*.rb") if (Dir.exist?(file_names))
+puts "The file path is #{file_names} ---"
+
+system("#{bprove} #{file_names}")
 
 
