@@ -1,6 +1,0 @@
-#!/bin/bash
-source ~/.bash_source_rvm
-
-pushd ~/repositories/aptus/tools/proof
-./bin/proof $*
-popd
