@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+folder = File.join(Dir.pwd, ARGV[0])
+gemset = folder.downcase.gsub(/\//,'_').slice(1,folder.length)
+system("rvm gemset delete #{gemset}")
