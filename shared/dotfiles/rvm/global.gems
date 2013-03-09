@@ -5,3 +5,4 @@ rake
 rvm
 interactive_editor
 awesome_print
+path_gem

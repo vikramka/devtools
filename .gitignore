@@ -7,6 +7,7 @@ tags
 .DS_Store
 .bash_history
 *.orig
+.*
 automation/autohotkey/ahk_start
 automation/git/*.sh
 automation/divvy/divvy
@@ -25,7 +26,6 @@ shared/dotfiles/vim/.vim_runtime/wordlist.vim
 shared/dotfiles/vim/vimrc.dotfile.erb
 shared/dotfiles/zsh/.zshrc
 shared/dotfiles/pentadactyl/.pentadactylrc
-.vikingrc
 shared/hosts/hosts
 shared/dotfiles/vim/.vim_runtime/bundle
 Gemfile.lock
@@ -36,3 +36,7 @@ mac/keymando/.keymandorc.rb
 windows/autohotkey/ahk*.ahk
 windows/autohotkey/merge_header_002_shared_variables.ahk
 windows/autohotkey/launch_ahk
+
+# Dot files/folders that should not be ignored
+!.mutt
+!.gnupg
