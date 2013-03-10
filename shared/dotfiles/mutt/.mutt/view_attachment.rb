@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+require 'fileutils'
+
 class Arguments
   attr_accessor :file
   attr_accessor :type
@@ -74,7 +76,7 @@ else
 end
 
 new_file_name = File.join(arguments.temp_dir, new_file_name)
-File.cp arguments.file, new_file_name
+FileUtils.cp arguments.file, new_file_name
 
 if (arguments.open_with)
   system("open -a #{arguments.open_with} #{new_file_name}")
