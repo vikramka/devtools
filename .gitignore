@@ -36,6 +36,7 @@ mac/keymando/.keymandorc.rb
 windows/autohotkey/ahk*.ahk
 windows/autohotkey/merge_header_002_shared_variables.ahk
 windows/autohotkey/launch_ahk
+offlineimap.pyc
 
 # Dot files/folders that should not be ignored
 !.mutt

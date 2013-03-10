@@ -9,7 +9,7 @@ set query_command="goobook query '%s'"
 # Change the following line to a different editor you prefer.
 
 # Paths ----------------------------------------
-set folder = ~/Dropbox/imap_mail
+set folder = ~/Dropbox/imap_mail/jp_developwithpassion
 set alias_file = ~/.mutt/alias
 set header_cache = ~/.mutt/cache/headers
 set message_cachedir =~/.mutt/cache/bodies
@@ -52,18 +52,18 @@ hdr_order from: to: cc: date: subject:  # and in this order
 # Account Settings -----------------------------------
 
 # Default inbox.
-set spoolfile = "+jp-developwithpassion.com/INBOX"
+set spoolfile = "+INBOX"
 
 # Mailboxes to show in the sidebar.
-mailboxes +jp-developwithpassion.com/INBOX \
-          +jp-developwithpassion.com/archive \
-          +jp-developwithpassion.com/sent \
-          +jp-developwithpassion.com/drafts \
+mailboxes +INBOX \
+          +archive \
+          +sent \
+          +drafts \
+          +trash \
 
 # Other special folders.
-set mbox      = "+jp-developwithpassion.com/archive"
-set postponed = "+jp-developwithpassion.com/drafts"
-set trash = "+jp-developwithpassion.com/trash"
+set mbox      = "+archive"
+set postponed = "+drafts"
 
 #Bindings --------------------------------------------------
 bind editor <Tab> complete-query
@@ -72,9 +72,11 @@ bind editor <space> noop
 
 # Gmail-style keyboard shortcuts
 macro index,pager gi "<change-folder>=INBOX<enter>" "Go to inbox"
-macro index,pager ga "<change-folder>=[Gmail]/All Mail<enter>" "Go to all mail"
-macro index,pager gs "<change-folder>=[Gmail]/Starred<enter>" "Go to starred messages"
-macro index,pager gd "<change-folder>=[Gmail]/Drafts<enter>" "Go to drafts"
+macro index,pager ga "<change-folder>=archive<enter>" "Go to all mail"
+macro index,pager gd "<change-folder>=drafts<enter>" "Go to drafts"
+macro index,pager gl "<change-folder>?/" "Go to specified folder"
+macro index,pager d "<save-message>=trash<enter>"  "Move message to trash"
+macro index,pager D "<delete-message>"  "Move message to trash"
 
 # Generic
 bind generic l select-entry
@@ -93,7 +95,7 @@ macro index a "<limit>all\n" "show all messages (undo limit)"
 
 # Sync email
 macro index O "<shell-escape>offlineimap<enter>"           "run offlineimap to sync all mail"
-macro index o "<shell-escape>offlineimap -qf INBOX<enter>" "run offlineimap to sync inbox"
+macro index o "<shell-escape>offlineimap -q<enter>" "run offlineimap to sync inbox"
 
 # Saner copy/move dialogs
 macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
