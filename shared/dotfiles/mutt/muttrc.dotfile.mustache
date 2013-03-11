@@ -76,6 +76,7 @@ macro index,pager ga "<change-folder>=archive<enter>" "Go to all mail"
 macro index,pager gd "<change-folder>=drafts<enter>" "Go to drafts"
 macro index,pager gl "<change-folder>?/" "Go to specified folder"
 macro index,pager d "<save-message>=trash<enter>"  "Move message to trash"
+macro index,pager e "<save-message>=archive<enter>"  "Move message to all mail"
 macro index,pager D "<delete-message>"  "Move message to trash"
 
 # Generic
@@ -119,7 +120,7 @@ bind pager N search-opposite
 
 
 # Compose
-bind compose p postpone-message
+bind compose p pgp-menu
 
 # Compose View Options -------------------------------
 set realname = "Jean-Paul S. Boodhoo"          # who am i?
