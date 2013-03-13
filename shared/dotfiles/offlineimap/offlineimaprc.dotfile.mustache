@@ -1,6 +1,6 @@
 [general]
 ui = TTYUI
-accounts = jp_developwithpassion_gmail
+accounts = jp_developwithpassion_gmail, jboodhoo_aptus_gmail
 pythonfile = ~/repositories/developwithpassion/devtools/shared/dotfiles/offlineimap/offlineimap.py
 fsync = False
 
@@ -9,8 +9,16 @@ fsync = False
 localrepository = jp_developwithpassion_gmail_local
 remoterepository = jp_developwithpassion_gmail_remote
 status_backend = sqlite
+postsynchook = notmuch new
+
+[Account jboodhoo_aptus_gmail]
+localrepository = jboodhoo_aptus_gmail_local
+remoterepository = jboodhoo_aptus_gmail_remote
+status_backend = sqlite
+postsynchook = notmuch new
 
 
+#developwithpassion
 [Repository jp_developwithpassion_gmail_local]
 type = Maildir
 localfolders = ~/Dropbox/imap_mail/jp_developwithpassion
@@ -28,6 +36,36 @@ type = Gmail
 cert_fingerprint = 6d1b5b5ee0180ab493b71d3b94534b5ab937d042 
 remoteuser = jp@developwithpassion.com
 remotepasseval = get_password("jp@developwithpassion.com")
+realdelete = no
+nametrans = lambda folder: {'[Gmail]/Sent Mail': 'sent',
+                            '[Gmail]/Starred': 'flagged',
+                            '[Gmail]/Trash': 'trash',
+                            '[Gmail]/All Mail': 'archive',
+                            '[Gmail]/Drafts': 'drafts'
+                            }.get(folder, folder)
+
+folderfilter = lambda folder: folder not in ['[Gmail]/Spam',
+                                           '[Gmail]/Important'
+                                           ]                           
+
+#aptus
+[Repository jboodhoo_aptus_gmail_local]
+type = Maildir
+localfolders = ~/Dropbox/imap_mail/jboodhoo_aptus
+nametrans = lambda folder: {'sent':    '[Gmail]/Sent Mail',
+                            'flagged': '[Gmail]/Starred',
+                            'trash':   '[Gmail]/Trash',
+                            'archive': '[Gmail]/All Mail',
+                            'drafts': '[Gmail]/Drafts'
+                            }.get(folder, folder)
+
+
+[Repository jboodhoo_aptus_gmail_remote]
+maxconnections = 1
+type = Gmail
+cert_fingerprint = 6d1b5b5ee0180ab493b71d3b94534b5ab937d042 
+remoteuser = jboodhoo@corp.aptus.io
+remotepasseval = get_password("jboodhoo@corp.aptus.io")
 realdelete = no
 nametrans = lambda folder: {'[Gmail]/Sent Mail': 'sent',
                             '[Gmail]/Starred': 'flagged',

@@ -1,0 +1,67 @@
+#!/usr/bin/env ruby
+
+require 'digest/sha1'
+require 'optparse'
+require 'fileutils'
+
+class Hasher
+  def initialize
+    @hasher = Digest::SHA1.new
+  end
+
+  def get_email_hash(file_name)
+    @hasher.hexdigest(IO.read(file_name))
+  end
+end
+
+def build_results_folder(results_path)
+  FileUtils.rm_rf(results_path)
+  FileUtils.mkdir_p(results_path)
+
+  %w/cur new/.each do |folder|
+    combined_path = File.join(results_path, folder)
+    FileUtils.mkdir_p(combined_path)
+  end
+end
+
+def read_line(message)
+  print "Query:"
+  STDIN.gets.chomp
+end
+
+def get_unique_files(files)
+  hasher = Hasher.new
+  messages = {}
+  files.each do |file|
+    hash = hasher.get_email_hash(file)
+    messages[hash] = file
+  end
+  messages.values
+end
+
+def get_matching_files(query)
+  `notmuch search --output=files #{query}`.split("\n")
+end
+
+def run(results_path)
+  build_results_folder(results_path)
+  query = read_line("Query?")
+  files = get_matching_files query
+  unique_files = get_unique_files files
+
+  unique_files.each do |file|
+    system("ln -s #{file} #{results_path}/cur/")
+  end
+end
+
+def parse_arguments
+  OptionParser.new do|options|
+    options.banner = "Usage is: mutt_not_much RESULTS_PATH"
+  end.parse!
+  
+  path = ARGV.length == 0 ? "/tempfiles/notmuch_search_results" : ARGV[0]
+end
+
+
+
+run parse_arguments

@@ -1,3 +1,5 @@
+set folder = ~/Dropbox/imap_mail/jp_developwithpassion
+
 set from = "jp@developwithpassion.com"
 set sendmail = "/usr/local/bin/msmtp -a jp"
 set sendmail_wait = 0
@@ -9,7 +11,6 @@ set query_command="goobook query '%s'"
 # Change the following line to a different editor you prefer.
 
 # Paths ----------------------------------------
-set folder = ~/Dropbox/imap_mail/jp_developwithpassion
 set alias_file = ~/.mutt/alias
 set header_cache = ~/.mutt/cache/headers
 set message_cachedir =~/.mutt/cache/bodies
@@ -78,6 +79,7 @@ macro index,pager gl "<change-folder>?/" "Go to specified folder"
 macro index,pager d "<save-message>=trash<enter>"  "Move message to trash"
 macro index,pager e "<save-message>=archive<enter>"  "Move message to all mail"
 macro index,pager D "<delete-message>"  "Move message to trash"
+macro index S "<enter-command>unset wait_key<enter><shell-escape>mutt_notmuch /tempfiles/notmuch_search_results<enter><change-folder-readonly>/tempfiles/notmuch_search_results<enter>" "search mail (using notmuch)"
 
 # Generic
 bind generic l select-entry
@@ -87,11 +89,10 @@ bind generic <right> select-entry
 bind index gg first-entry
 bind index G last-entry
 bind index R group-reply
-bind index <tab> sync-mailbox
 bind index <space> collapse-thread
 bind index p recall-message
 bind index N search-opposite
-macro index a "<limit>all\n" "show all messages (undo limit)"
+macro index,pager gac "<pipe-message>goobook add<return>" "Add the contact to google contacts"
 
 
 # Sync email
@@ -117,6 +118,8 @@ bind pager l view-attachments
 bind attach <return> view-mailcap
 macro pager \Cu "|urlview<enter>"  "call url view to open links"
 bind pager N search-opposite
+bind pager em edit 
+
 
 
 # Compose
