@@ -24,6 +24,7 @@ alias eahk='vi {{{core.devtools_root}}}/windows/autohotkey'
 {{^ core.is_windows }}
 alias mutta='mutt -F ~/.muttrc_jboodhoo_aptus'
 alias muttd='mutt -F ~/.muttrc_jp_developwithpassion'
+alias smail="tmux new-window 'mutt -F ~/.muttrc_jp_developwithpassion' \; split-window -v 'mutt -F ~/.muttrc_jboodhoo_aptus'"
 {{/core.is_windows }}
 
 {{# core.is_cygwin }}
