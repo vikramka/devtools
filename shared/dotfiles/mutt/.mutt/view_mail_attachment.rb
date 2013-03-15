@@ -7,20 +7,9 @@ class Arguments
   attr_accessor :type
   attr_accessor :open_with
   attr_accessor :temp_dir
-  attr_accessor :debug_file
-  attr_accessor :debug
 
   def temp_dir
     @temp_dir ||= "/tempfiles/mutt_attachments"
-  end
-
-  def debug_file
-    @debug_file ||= File.join(temp_dir, "debug")
-  end
-
-  def debug
-    @debug = true if @debug == nil
-    @debug
   end
 
   def base_file_name
@@ -44,33 +33,15 @@ def build_arguments(arguments)
   result
 end
 
-class Debug
-  def initialize(filename)
-    @file_name = filename
-  end
-
-  def write(message)
-    File.open(@file_name,'a') do |file|
-      file << "#{message}\n"
-    end
-  end
-end
-
 arguments = build_arguments(ARGV)
-debug = Debug.new(arguments.debug_file)
 
 system("mkdir -p #{arguments.temp_dir}")
 system("rm -rf #{arguments.temp_dir}/*")
 
-if arguments.debug
-  debug.write "Arguments: #{ARGV.join(" ")}"
-  debug.write "Filename:#{arguments.file}"
-  debug.write "File Type:#{arguments.type}"
-end
 
 new_file_name = ""
 if (arguments.type == "-")
-  new_file_name = arguments.type 
+  new_file_name = File.basename(arguments.file)
 else
   new_file_name = "#{arguments.base_file_name_without_extension}.#{arguments.type}"
 end

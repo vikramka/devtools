@@ -32,7 +32,7 @@ unset mark_old
 set beep_new
 set pipe_decode
 set thorough_search
-set editor = "vim --cmd 'let g:goobookrc=\"/Users/jp/.goobookrc\"'"
+set editor = "vi --cmd 'let g:goobookrc=\"/Users/jp/.goobookrc\"'"
 
 # Sidebar Patch ----------------------------------------
 set sidebar_delim = '  |'
@@ -96,8 +96,8 @@ macro index,pager gac "<pipe-message>goobook add<return>" "Add the contact to go
 
 
 # Sync email
-macro index O "<shell-escape>offlineimap<enter>"           "run offlineimap to sync all mail"
-macro index o "<shell-escape>offlineimap -q<enter>" "run offlineimap to sync inbox"
+macro index O "<shell-escape>offlineimap -a jp_developwithpassion_gmail<enter>"  "run offlineimap to sync all mail"
+macro index o "<shell-escape>offlineimap -q -a jp_developwithpassion_gmail<enter>" "run offlineimap to sync inbox"
 
 # Saner copy/move dialogs
 macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"

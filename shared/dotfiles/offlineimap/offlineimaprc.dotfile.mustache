@@ -44,9 +44,7 @@ nametrans = lambda folder: {'[Gmail]/Sent Mail': 'sent',
                             '[Gmail]/Drafts': 'drafts'
                             }.get(folder, folder)
 
-folderfilter = lambda folder: folder not in ['[Gmail]/Spam',
-                                           '[Gmail]/Important'
-                                           ]                           
+folderfilter = lambda folder: not is_excluded(folder)
 
 #aptus
 [Repository jboodhoo_aptus_gmail_local]
@@ -74,6 +72,4 @@ nametrans = lambda folder: {'[Gmail]/Sent Mail': 'sent',
                             '[Gmail]/Drafts': 'drafts'
                             }.get(folder, folder)
 
-folderfilter = lambda folder: folder not in ['[Gmail]/Spam',
-                                           '[Gmail]/Important'
-                                           ]                           
+folderfilter = lambda folder: not is_excluded(folder)

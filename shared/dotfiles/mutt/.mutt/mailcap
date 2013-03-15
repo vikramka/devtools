@@ -1,19 +1,19 @@
-# MS Word documents
-application/msword; ~/.mutt/view_attachment.sh %s "-" '/Applications/TextEdit.app'
+# MS Office files
+application/msword; ~/.mutt/view_mail_attachment.rb --file:%s --type:"-" --open_with:'/Applications/OpenOffice.org.app'
+application/vnd.ms-excel; ~/.mutt/view_mail_attachment.rb --file:%s --type:"-"
 
 # Images
-image/jpg; ~/.mutt/view_attachment.sh %s jpg
-image/jpeg; ~/.mutt/view_attachment.sh %s jpg
-image/pjpeg; ~/.mutt/view_attachment.sh %s jpg
-image/png; ~/.mutt/view_attachment.sh %s png
-image/gif; ~/.mutt/view_attachment.sh %s gif
+image/jpg; ~/.mutt/view_mail_attachment.rb --file:%s --type:jpg
+image/jpeg; ~/.mutt/view_mail_attachment.rb --file:%s --type:jpg
+image/pjpeg; ~/.mutt/view_mail_attachment.rb --file:%s --type:jpg
+image/png; ~/.mutt/view_mail_attachment.rb --file:%s --type:png
+image/gif; ~/.mutt/view_mail_attachment.rb --file:%s --type:gif
 
 # PDFs
-# application/pdf; ~/.mutt/view_attachment.sh %s pdf
-application/pdf; ~/.mutt/view_attachment.rb --file:%s --type:pdf
+application/pdf; ~/.mutt/view_mail_attachment.rb --file:%s --type:pdf
 
 # HTML
-text/html; ~/.mutt/view_attachment.sh %s html
+text/html; ~/.mutt/view_mail_attachment.rb --file:%s --type:html
 
 # Unidentified files
-application/octet-stream; ~/.mutt/view_attachment.sh %s "-"
+application/octet-stream; ~/.mutt/view_mail_attachment.rb --file:%s --type:"-"
