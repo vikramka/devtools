@@ -97,7 +97,8 @@ macro index,pager gac "<pipe-message>goobook add<return>" "Add the contact to go
 
 # Sync email
 macro index O "<shell-escape>offlineimap -a jp_developwithpassion_gmail<enter>"  "run offlineimap to sync all mail"
-macro index o "<shell-escape>offlineimap -q -a jp_developwithpassion_gmail<enter>" "run offlineimap to sync inbox"
+macro index oa "<shell-escape>offlineimap -q -a jp_developwithpassion_gmail<enter>" "run offlineimap to sync all folders quickly"
+macro index oi "<shell-escape>offlineimap -q -a jp_developwithpassion_gmail -f INBOX<enter>" "run offlineimap to sync inbox"
 
 # Saner copy/move dialogs
 macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
