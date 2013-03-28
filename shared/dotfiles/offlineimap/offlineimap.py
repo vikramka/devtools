@@ -66,12 +66,12 @@ exclusion_patterns = [
   "unblock_us",
   "web_hosting",
   "webinars",
-  "Gmail.*Spam",
   "Gmail.*Important"
 ]
 
 name_mappings = [
   NameMapping('sent', '[Gmail]/Sent Mail'),
+  NameMapping('spam', '[Gmail]/Spam'),
   NameMapping('flagged', '[Gmail]/Starred'),
   NameMapping('trash',   '[Gmail]/Trash'),
   NameMapping('archive', '[Gmail]/All Mail'),

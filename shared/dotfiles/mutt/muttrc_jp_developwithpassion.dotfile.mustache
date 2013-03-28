@@ -19,6 +19,8 @@ set mailcap_path = ~/.mutt/mailcap
 set tmpdir = ~/.mutt/temp
 set signature = ~/.mutt/sig
 
+source $alias_file
+
 #Basic Options ----------------------------------------
 set wait_key = no
 set mbox_type = Maildir
@@ -68,7 +70,7 @@ set postponed = "+drafts"
 
 #Bindings --------------------------------------------------
 bind editor <Tab> complete-query
-bind editor ^T complete
+bind editor \< complete
 bind editor <space> noop 
 
 # Gmail-style keyboard shortcuts
