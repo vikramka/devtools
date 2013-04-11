@@ -1,6 +1,7 @@
 # MS Office files
 application/msword; ~/.mutt/view_mail_attachment.rb --file:%s --type:"-" --open_with:'/Applications/OpenOffice.org.app'
 application/vnd.ms-excel; ~/.mutt/view_mail_attachment.rb --file:%s --type:"-"
+application/vnd.openxmlformats-officedocument.presentationml.presentation; ~/.mutt/view_mail_attachment.rb --file:%s --type:"-" --open_with:'/Applications/OpenOffice.org.app'
 
 # Images
 image/jpg; ~/.mutt/view_mail_attachment.rb --file:%s --type:jpg
